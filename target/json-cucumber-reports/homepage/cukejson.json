@@ -1,0 +1,120 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-05-10T10:38:42.818Z",
+        "before": [
+          {
+            "result": {
+              "duration": 6248684600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "HomePageSteps.before(Scenario)"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "SEmentor Home page verification",
+        "description": "",
+        "id": "home-page-verifications;sementor-home-page-verification",
+        "after": [
+          {
+            "result": {
+              "duration": 281389200,
+              "status": "passed"
+            },
+            "match": {
+              "location": "HomePageSteps.after(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8672174500,
+              "status": "passed"
+            },
+            "before": [
+              {
+                "result": {
+                  "duration": 2010124100,
+                  "status": "passed"
+                },
+                "match": {
+                  "location": "HomePageSteps.beforeStep()"
+                }
+              }
+            ],
+            "line": 6,
+            "name": "User navigates to SEmentor HomePage",
+            "match": {
+              "location": "HomePageSteps.user_navigates_to_sementor_homepage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 895192400,
+              "status": "passed"
+            },
+            "before": [
+              {
+                "result": {
+                  "duration": 2005253600,
+                  "status": "passed"
+                },
+                "match": {
+                  "location": "HomePageSteps.beforeStep()"
+                }
+              }
+            ],
+            "line": 7,
+            "name": "User click on careers page",
+            "match": {
+              "location": "HomePageSteps.user_click_on_careers_page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 55100,
+              "status": "passed"
+            },
+            "before": [
+              {
+                "result": {
+                  "duration": 2017325200,
+                  "status": "passed"
+                },
+                "match": {
+                  "location": "HomePageSteps.beforeStep()"
+                }
+              }
+            ],
+            "line": 8,
+            "name": "User check whether open postion title is displyed",
+            "match": {
+              "location": "HomePageSteps.user_check_whether_open_postion_title_is_displyed()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@home_page"
+          }
+        ]
+      }
+    ],
+    "name": "Home Page Verifications",
+    "description": "",
+    "id": "home-page-verifications",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/HomePage/01_NavigateTo_HomePage.feature",
+    "tags": []
+  }
+]
