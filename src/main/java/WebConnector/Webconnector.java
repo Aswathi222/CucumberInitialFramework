@@ -38,6 +38,8 @@ import org.testng.Assert;
 import io.cucumber.core.api.Scenario;
 
 public class Webconnector  {
+	
+	//common functions can be added 
 	Assert asrt;
 	WebElement WebElement;
 	public static WebDriver driver=null;
