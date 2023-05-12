@@ -3,7 +3,11 @@ package WebConnector;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -15,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,16 +30,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import io.cucumber.core.api.Scenario;
 
-public class webconnector<V> {
-
+public class Webconnector  {
+	Assert asrt;
+	WebElement WebElement;
 	public static WebDriver driver=null;
 	public  SessionId session=null;
 	public static Properties prop = new Properties();
+	public Select select;
 	
-	public webconnector(){
+	public Webconnector(){
     	try {
     		prop.load( new FileInputStream("./src/test/config/application.properties") );
     	} catch (IOException e) {
@@ -233,4 +244,45 @@ public class webconnector<V> {
 	    		throw new IllegalArgumentException("wait For Condition \"" + TypeOfWait + "\" isn't supported.");
 	    	}
     }
+    
+    public void selectorByVisibleText(String locator,String text) throws Exception {     //drpdown
+		WebElement = FindAnElement(locator);
+		highLighterMethod(driver, WebElement); 
+		select = new Select(WebElement);
+	    select.selectByVisibleText(text);
+	   
+   }
+    
+    public void highLighterMethod(WebDriver driver, WebElement element){
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    String bgColor = element.getCssValue("backgroundColor");
+	        js.executeScript("arguments[0].setAttribute('style', 'background: "+bgColor+"; border: 2px solid red;');", element);
+	       
+	        }
+    
+    public void selectCheckBox(String locator) throws Exception {
+ 	   WebElement  = FindAnElement(locator);
+ 	    boolean isSelected = WebElement.isSelected();
+ 		//performing click operation if element is not checked
+ 	 if(isSelected == false) {
+ 		 WebElement.click();
+ 	    
+ 	  }
+    }
+    
+    public boolean validateText(String locator) throws Exception {
+		WebElement = FindAnElement(locator);
+		boolean status = WebElement.isDisplayed();
+		asrt.assertTrue(status);
+		return status;		
+	}
+    
+    public void switchTab(int index) throws Exception {
+		
+    	List<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+    	driver.switchTo().window(newTab.get(index));
+	}
+    
+    
+   
 }
