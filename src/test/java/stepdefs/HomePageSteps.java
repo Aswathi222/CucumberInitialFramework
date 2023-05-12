@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import ApplicationPages.Homepage;
-import WebConnector.webconnector;
+import WebConnector.Webconnector;
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,7 +13,7 @@ import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class HomePageSteps extends webconnector {
+public class HomePageSteps extends Webconnector {
     private Homepage homePage;
 	private String scenDesc;
 
@@ -50,7 +50,7 @@ public class HomePageSteps extends webconnector {
     
     @Then("^User check whether open postion title is displyed$")
     public void user_check_whether_open_postion_title_is_displyed() throws Throwable {
-        //homePage.checkOpenPositionPage();
+        homePage.checkOpenPositionPage();
     }
 
     
