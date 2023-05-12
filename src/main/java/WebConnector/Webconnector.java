@@ -278,7 +278,7 @@ public class Webconnector  {
 	}
     
     public void switchTab(int index) throws Exception {
-		
+	//to performswitch action	
     	List<String> newTab = new ArrayList<String>(driver.getWindowHandles());
     	driver.switchTo().window(newTab.get(index));
 	}
