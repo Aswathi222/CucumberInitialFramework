@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testng-results failed="0" passed="1" skipped="0" total="1">
+    <suite duration-ms="31463" name="cucumber.runtime.formatter.TestNGFormatter">
+        <test duration-ms="31463" name="cucumber.runtime.formatter.TestNGFormatter">
+            <class name="Home Page Verifications">
+                <test-method duration-ms="31463" finished-at="2023-05-12T15:41:49Z" name="SEmentor Home page verification" started-at="2023-05-12T15:41:49Z" status="PASS"/>
+            </class>
+        </test>
+    </suite>
+</testng-results>

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
@@ -195,6 +196,7 @@ public class Webconnector  {
     public void PerformActionOnElement(String WebElement, String Action, String Text) throws Exception {
     	switch (Action) {
 		case "Click":
+			highLighterMethod(driver, WebElement);
 			FindAnElement(WebElement).click();
 			break;
 		case "Type":
@@ -249,16 +251,17 @@ public class Webconnector  {
     
     public void selectorByVisibleText(String locator,String text) throws Exception {     //drpdown
 		WebElement = FindAnElement(locator);
-		highLighterMethod(driver, WebElement); 
+		highLighterMethod(driver, locator); 
 		select = new Select(WebElement);
 	    select.selectByVisibleText(text);
 	   
    }
     
-    public void highLighterMethod(WebDriver driver, WebElement element){
+    public void highLighterMethod(WebDriver driver, String element) throws Exception{
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
-	    String bgColor = element.getCssValue("backgroundColor");
-	        js.executeScript("arguments[0].setAttribute('style', 'background: "+bgColor+"; border: 2px solid red;');", element);
+	    WebElement = FindAnElement(element);
+	    String bgColor = WebElement.getCssValue("backgroundColor");
+	    js.executeScript("arguments[0].setAttribute('style', 'background: "+bgColor+"; border: 2px solid red;');", WebElement);
 	       
 	        }
     
@@ -280,10 +283,65 @@ public class Webconnector  {
 	}
     
     public void switchTab(int index) throws Exception {
-		
+	//to performswitch action	
     	List<String> newTab = new ArrayList<String>(driver.getWindowHandles());
     	driver.switchTo().window(newTab.get(index));
 	}
+    
+    public void autoSuggestiveDropDown(By locator,String text) {
+	    ArrayList<WebElement> elementList = new ArrayList<>(driver.findElements(locator)) ;
+	     for(int i=0;i<elementList.size();i++) {
+	    	 
+	    	  if(elementList.get(i).getText().equalsIgnoreCase(text)) {
+	    		  elementList.get(i).click();
+	    		  break;
+	    	  }
+	     }
+	     
+   }
+    public void switchToFrame(String locator) throws Exception {
+    	WebElement =FindAnElement(locator);
+		driver.switchTo().frame(WebElement);
+		
+	}
+	
+	public void switchToDefaultContent() {
+		driver.switchTo().defaultContent();
+	}
+	
+	private List<String> getWindowIds(){
+
+        ArrayList<String> windowIds = new ArrayList<>(driver.getWindowHandles());
+        return Collections.unmodifiableList(windowIds);
+
+    }
+	
+	public void switchToWindow(int index){
+
+	        ArrayList<String> windowIds = new ArrayList<>(getWindowIds());
+	        if(index < 0 || index >windowIds.size())
+	            throw new IllegalArgumentException("Invalid index" +index);
+	        driver.switchTo().window(windowIds.get(index));
+
+	    }
+
+	    public void switchToParent(){
+
+	        ArrayList<String> windowIds = new ArrayList<>(getWindowIds());
+	        driver.switchTo().window(windowIds.get(0));
+
+	    }
+
+	    public void switchToParentWithClose(){
+	      //This will close all windows(Child windows) except parent window
+	        ArrayList<String> windowIds = new ArrayList<>(getWindowIds());
+
+	        for(int i=1;i<windowIds.size();i++){
+	        	driver.switchTo().window(windowIds.get(i));
+	        	driver.close();
+	        }
+	        switchToParent();
+	    }
     
     
    
