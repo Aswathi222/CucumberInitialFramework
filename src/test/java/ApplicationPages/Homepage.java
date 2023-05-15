@@ -30,8 +30,7 @@ public class Homepage {
     	wc.waitForCondition("Visibility", "OpenPositions",60);   	
     	Assert.assertTrue(wc.FindAnElement("OpenPositions").isDisplayed(),"Open position page reached successfully");
     	System.out.println("hvhfvfv");
-    	Thread.sleep(4000);
-    	wc.switchTab(0);
+    	//wc.switchTab(0);
     	
     }
     
